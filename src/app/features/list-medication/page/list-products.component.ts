@@ -18,8 +18,8 @@ export interface Data {
 
 @Component({
   selector: 'app-list-products',
-  templateUrl: './list-Products.component.html',
-  styleUrl: './list-Products.component.scss'
+  templateUrl: './list-products.component.html',
+  styleUrl: './list-products.component.scss'
 })
 export class ListProductsComponent implements OnInit {
   products: Data | undefined;
