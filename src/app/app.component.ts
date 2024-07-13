@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from "./features/sidebar/sidebar.component";
+import {SidebarModule} from "./features/sidebar/sidebar.module";
+import {RouterOutlet} from "@angular/router";
+import {SharedModule} from "./shared/shared.module";
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CommonModule} from "@angular/common";
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterOutlet, SidebarComponent]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  standalone: true,
+  imports: [RouterOutlet, SidebarModule, SharedModule]
 })
 export class AppComponent {
   title = 'farmatechers';

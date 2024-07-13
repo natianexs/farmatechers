@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { SidebarComponent } from "../../../sidebar/sidebar.component";
+import { SidebarComponent } from "../../../sidebar/sidebar/sidebar.component";
+import {SidebarModule} from "../../../sidebar/sidebar.module";
 
 @Component({
     selector: 'app-home-page',
-    standalone: true,
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
-    imports: [SidebarComponent]
 })
 export class HomePageComponent {
 

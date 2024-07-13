@@ -10,15 +10,15 @@ import { RegisterMedicationService } from '../services/register-medication.servi
 })
 export class RegisterMedicationComponent implements OnInit {
   public form!: FormGroup;
+  mascaraMoedaBR="0,00||00,00||000,00||0000,00";
   public key!: string;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private service: RegisterMedicationService
+    private service: RegisterMedicationService,
   ) {
     this.key = this.router.url.split('/')[2];
   }
-
 
   ngOnInit(): void {
     this.createForm();
@@ -55,7 +55,7 @@ export class RegisterMedicationComponent implements OnInit {
       });
     } else {
       this.service.createRegisterMedication(this.form.value).subscribe(() => {
-        alert('Medication registered successfully');
+        alert('Product created successfully');
         this.form.reset();
       });
     }
