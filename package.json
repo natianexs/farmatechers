@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "gh-build": "ng build --base-href /farmatechers/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:farmatechers": "node dist/farmatechers/server/server.mjs"
