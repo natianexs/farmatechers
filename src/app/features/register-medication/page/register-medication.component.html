@@ -1,0 +1,53 @@
+<div class="p-3 border-bottom">
+    <div class="pl-5 d-flex justify-content-star align-items-center">
+        <a href="" class="border-0 text-title-default">
+            <i class="bi bi-arrow-left-circle mr-2"></i>
+        </a>
+        <h1 class="text-center text-title-default">Cadastro de Produtos</h1>
+    </div>
+
+</div>
+
+<div class="p-5">
+    <form [formGroup]="form" class="shadow-lg p-5 mb-5 bg-white rounded" autocomplete="off">
+        <div class="row">
+            <div class="form-group col">
+                <label class="required">Código de Barras</label>
+                <input type="number" class="form-control" formControlName="barCode" id="exampleFormControlInput1"
+                    placeholder="4578978789789">
+            </div>
+            <div class="form-group col">
+                <label class="required">Data de validade</label>
+                <input type="date" class="form-control" formControlName="expirationDate" id="exampleFormControlInput1"
+                    placeholder="DD/MM/AAAA">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="required text-farma-primary">Descrição</label>
+            <input type="text" class="form-control" formControlName="description" id="exampleFormControlInput1"
+                placeholder="Dipirona Sódica 500mg 10 Comprimidos Ems Genérico">
+        </div>
+
+        <div class="row">
+            <div class="form-group col">
+                <label class="required text-farma-primary">Quantidade</label>
+                <input type="number" class="form-control" formControlName="quantity" id="exampleFormControlInput1"
+                    placeholder="20">
+            </div>
+            <div class="form-group col">
+                <label class="required">Preço unitário</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">R$</div>
+                    </div>
+                    <input type="number" class="form-control" formControlName="price" id="exampleFormControlInput1"
+                        placeholder="5,49">
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="d-flex justify-content-end">
+        <button type="buttton" class="btn btn-success mr-3" (click)="save()">Salvar</button>
+        <button type="button" class="btn btn-danger" (click)="goBack()">Cancelar</button>
+    </div>
+</div>

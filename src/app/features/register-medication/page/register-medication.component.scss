@@ -1,0 +1,14 @@
+
+.bi::before{
+    font-size: 30px;
+}
+
+h1, a , label {
+    color: var(--default-color-title);
+}
+
+button {
+    font-weight: 500;
+    height: 50px;
+    width: 120px;
+}

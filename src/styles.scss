@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/variables";
+
+body {
+  /* Define a altura e largura do elemento */
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+
+  /* Aplica o gradiente de fundo */
+  background: var(--bs-body-bg);
+}
+
+:root {
+  --bs-body-bg: #F4F8FF;
+  --default-family: 'Roboto';
+  --default-color-title: #183c8c;
+}
+
+
+label {
+  font-weight: 700;
+
+  &.required::after {
+    content: '*';
+    color: red;
+  }
+}
+
+.form-control {
+  background-color: white;
+
+  &:focus {
+    border-color: #183c8c;
+    box-shadow: 0 0 0 0.25rem rgba(24, 60, 140, 0.25);
+    background-color: white;
+  }
+}
