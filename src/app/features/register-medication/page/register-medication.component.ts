@@ -18,6 +18,7 @@ export class RegisterMedicationComponent implements OnInit {
     private service: RegisterMedicationService,
   ) {
     this.key = this.router.url.split('/')[2];
+    console.log(this.key);
   }
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class RegisterMedicationComponent implements OnInit {
   }
 
   getProduct() {
-    if (this.key !== 'register') {
+    if (this.key) {
       this.service.getRegisterMedication(this.key).subscribe((product) => {
         this.form.patchValue(product);
       });
@@ -48,7 +49,7 @@ export class RegisterMedicationComponent implements OnInit {
   }
 
   save() {
-    if (this.key !== 'register') {
+    if (this.key) {
       this.service.updateProduct(this.key, this.form.value).subscribe(() => {
         alert('Product updated successfully');
         this.router.navigate(['products']);

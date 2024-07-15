@@ -1,0 +1,12 @@
+<div>
+  <input #productInput type="text" placeholder="Pesquisar produto">
+  <button (click)="addProduct(productInput.value)">Adicionar</button>
+</div>
+
+<div *ngIf="notFoundMessage" class="alert alert-warning">
+  {{ notFoundMessage }}
+</div>
+
+<ul>
+  <li *ngFor="let product of products | keyvalue">{{ product.value }}</li>
+</ul>

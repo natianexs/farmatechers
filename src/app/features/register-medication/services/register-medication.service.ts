@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Data } from '@angular/router';
 import { Observable } from 'rxjs';
+import {Product} from "../../../core/models/products";
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,11 @@ export class RegisterMedicationService {
   }
 
   getRegisterMedication(key: string): Observable<Data> {
-    return this.httpClient.get<Data>(`https://farmatech-27e91-default-rtdb.firebaseio.com/Products/${key}.json`);
+    return this.httpClient.get<Product>(`https://farmatech-27e91-default-rtdb.firebaseio.com/Products/${key}.json`);
   }
 
   updateProduct(key: string, product: Data): Observable<void> {
     return this.httpClient.put<void>(`https://farmatech-27e91-default-rtdb.firebaseio.com/Products/${key}.json`, product);
   }
+
 }

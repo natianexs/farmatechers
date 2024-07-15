@@ -9,7 +9,7 @@
 </div>
 
 <div class="p-3">
-  <form [formGroup]="form" class="shadow-lg p-5 mb-5 bg-white rounded" autocomplete="off">
+  <form [formGroup]="form" class="shadow-lg p-5 mb-3 bg-white rounded" autocomplete="off">
     <div class="col-md-auto">
       <div class="row">
         <div class="form-group col">
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group col">
           <label class="required">Data de validade</label>
-          <input type="text" class="form-control" formControlName="expirationDate" id="dateValid" mask="00/00/0000"
+          <input type="text" class="form-control" formControlName="expirationDate" id="dateValid" mask="00/00/0000" [dropSpecialCharacters]="false"
                  placeholder="DD/MM/AAAA">
         </div>
       </div>
@@ -42,7 +42,7 @@
               <div class="input-group-text">R$</div>
             </div>
             <input type="text" class="form-control" formControlName="price" id="price" [mask]=mascaraMoedaBR
-                   placeholder="5,49">
+                   placeholder="5,49"  [dropSpecialCharacters]="false">
           </div>
         </div>
       </div>

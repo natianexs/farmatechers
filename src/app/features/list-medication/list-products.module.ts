@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../../shared/shared.module';
 import { ListProductsComponent } from './page/list-products.component';
-import { ListProductsService } from './services/list-products.service';
+import {NgxMaskDirective, NgxMaskPipe} from "ngx-mask";
 
 
 
@@ -17,7 +17,9 @@ import { ListProductsService } from './services/list-products.service';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ]
 })
 export class ListProductsModule { }

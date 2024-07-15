@@ -2,8 +2,8 @@ import { ApplicationConfig } from '@angular/core';
 import {provideRouter, RouterOutlet} from '@angular/router';
 
 import { routes } from './app.routes';
-import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
-import {HttpClientModule, provideHttpClient, withFetch} from '@angular/common/http';
+import {provideClientHydration} from '@angular/platform-browser';
+import {provideHttpClient, withFetch} from '@angular/common/http';
 import { RegisterMedicationModule } from './features/register-medication/register-medication.module';
 import { ListProductsModule } from './features/list-medication/list-products.module';
 import {provideEnvironmentNgxMask} from "ngx-mask";
@@ -11,9 +11,8 @@ import {SidebarModule} from "./features/sidebar/sidebar.module";
 import {SharedModule} from "./shared/shared.module";
 import {CommonModule} from "@angular/common";
 import {HomeModule} from "./features/home/home.module";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PdvModule} from "./features/pdv/pdv.module";
 
-;
 
 
 export const appConfig: ApplicationConfig = {
@@ -21,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(),
+    PdvModule,
     RegisterMedicationModule,
     SidebarModule,
     HomeModule,

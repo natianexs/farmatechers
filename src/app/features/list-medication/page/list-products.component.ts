@@ -1,19 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListProductsService } from '../services/list-products.service';
 import { Router } from '@angular/router';
-
-
-export interface Item {
-  barCode: string;
-  description: string;
-  expirationDate?: number;
-  price: any; // Defina como `any` se o preço puder ser de diferentes tipos (string ou número)
-  quantity: number;
-}
-
-export interface Data {
-  [key: string]: Item;
-}
+import {Product} from "../../../core/models/products";
 
 
 @Component({
@@ -22,7 +10,7 @@ export interface Data {
   styleUrl: './list-products.component.scss'
 })
 export class ListProductsComponent implements OnInit {
-  products: Data | undefined;
+  products!: Product;
   description = '';
   constructor(private service: ListProductsService, private router: Router) { }
   ngOnInit(): void {
@@ -34,7 +22,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   private getProducts(filter = '') {
-    this.service.gelAllProducts(filter).subscribe((products) => {
+    this.service.gelAllProducts(filter).subscribe((products:Product) => {
       this.products = products;
       console.log(this.products);
     });
@@ -49,11 +37,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   editItem(key: string) {
-    // , product: Item
     this.router.navigate([`products/${key}`]);
-    // this.service.updateProduct(key, product).subscribe(() => {
-    //   alert('Product updated successfully');
-    // });
   }
 
 }
