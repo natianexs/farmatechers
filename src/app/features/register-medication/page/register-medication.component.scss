@@ -12,3 +12,9 @@ button {
     height: 50px;
     width: 120px;
 }
+
+@media (min-width: 768px) {
+  .button-container {
+    justify-content: flex-end !important;
+  }
+}

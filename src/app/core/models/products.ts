@@ -10,3 +10,10 @@ export interface Item {
 export interface Product {
   [key: string]: Item;
 }
+
+export interface Products {
+  code:string;
+  name:string;
+  price: number;
+  quantity: number;
+}

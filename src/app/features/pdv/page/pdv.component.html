@@ -1,0 +1,72 @@
+  <!--  <div class="p-3 border-bottom header">-->
+  <!--    <div class="d-flex justify-content-star align-items-center">-->
+  <!--      <a href="" class="border-0 text-title-default">-->
+  <!--        <i class="bi bi-arrow-left-circle mr-2"></i>-->
+  <!--      </a>-->
+  <!--      <h1 class="text-center text-title-default">PDV</h1>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <div class="pt-5">
+    <div class="form-group d-flex align-items-end">
+      <input class="form-control" type="text" [(ngModel)]="searchQuery" (keyup.enter)="searchProduct()">
+      <div class="d-flex justify-content-end ml-2">
+        <button class="btn btn-primary mr-2" (click)="searchProduct()">
+          <i class="bi bi-search"></i>
+        </button>
+        <button class="btn btn-primary" (click)="openBarcodeScanner()">
+          <i class="bi bi-camera"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="list" class="col overflow-y-scroll">
+        <div  *ngIf="errorMessage !=''" class="p-2">
+          <span class="text-center text-danger fs-3 fw-bolder">{{errorMessage}}</span>
+        </div>
+
+        <span class="text-dark text-center" *ngIf="!productList.length" >Não há produtos adicionados à listagem</span>
+        <app-list-pdv (emitterCalculate)="calculateTotal()" [productList]="productList"></app-list-pdv>
+      </div>
+
+      <div id="product-image" class="col-4">
+        <div class="card rounded">
+
+          <barcode-scanner-livestream
+            type="code_128"
+            (valueChanges)="onValueChanges($event)"
+            (started)="onStarted($event)"
+            [hidden]="!isBarcodeScannerVisible"
+          ></barcode-scanner-livestream>
+
+         <img src="assets/medicine.svg" class="rounded float-left" alt="..." [hidden]="isBarcodeScannerVisible">
+        </div>
+        <div class="mt-4">
+          <div *ngIf="currentProduct" class="row">
+            <div [hidden]="!barcodeValue">
+              {{ barcodeValue }}
+            </div>
+
+            <label class="text-dark col">{{currentProduct?.name}}</label>
+            <div class="cash col">R$ {{currentProduct?.price}}</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="d-flex">
+            <label class="cash-total">Total: <span class="cash-value">R$ {{totalValue}}</span></label>
+          </div>
+
+        </div>
+
+        <div class="col-4">
+          <button class="btn btn-primary btn-lg" [disabled]="!productList.length">Finalizar Venda</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+

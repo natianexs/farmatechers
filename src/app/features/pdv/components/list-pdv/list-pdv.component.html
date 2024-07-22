@@ -1,0 +1,33 @@
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let product of productList; let index=index">
+      <tr>
+        <th scope="row">{{product.code}}</th>
+        <td>{{product.name}}</td>
+        <td>
+            <button class="btn btn-danger" (click)="removeProduct(product,index)"> - </button>
+        </td>
+        <td>{{product.quantity}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="increaseQuantity(product)">
+          <i class=" bi bi-plus"></i>
+        </button>
+        </td>
+        <td>R${{product.price}}</td>
+        <td>
+          <i class="bi bi-trash" style="font-size: 30px" (click)="deleteItem(index)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import {provideClientHydration} from '@angular/platform-browser';
 import {provideHttpClient, withFetch} from '@angular/common/http';
 import { RegisterMedicationModule } from './features/register-medication/register-medication.module';
-import { ListProductsModule } from './features/list-medication/list-products.module';
+import { ListProductsModule } from './features/list-products/list-products.module';
 import {provideEnvironmentNgxMask} from "ngx-mask";
 import {SidebarModule} from "./features/sidebar/sidebar.module";
 import {SharedModule} from "./shared/shared.module";

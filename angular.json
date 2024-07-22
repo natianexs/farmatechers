@@ -20,6 +20,7 @@
             "outputPath": "dist/farmatechers",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "externalDependencies":[""],
             "polyfills": [
               "zone.js"
             ],
@@ -104,6 +105,6 @@
     }
   },
   "cli": {
-    "analytics": "2b47c46d-40dd-43d3-9b33-811a09824796"
+    "analytics": false
   }
 }

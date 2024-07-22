@@ -1,0 +1,42 @@
+.table{
+  border-collapse: separate;
+  border-spacing: 7px;
+}
+
+.table td, .table th {
+  border: none !important;
+}
+
+table tbody tr {
+  position : relative;
+}
+
+table tbody tr td {
+  position : relative;
+}
+
+//table tbody tr:after {
+//  content : '';
+//  position : absolute;
+//  //z-index : 1;
+//  left : 0;
+//  width : 100%;
+//  height : 100%;
+//  border: 1px solid #CECECE;
+//}
+
+table tbody tr {
+  position: relative; /* Ensure the row is positioned relative to its normal position */
+}
+
+table tbody tr:after {
+  content: '';
+  position: absolute;
+  z-index: 0; /* Ensure the pseudo-element is behind the row content */
+  left: 0;
+  top: 0; /* Ensure the pseudo-element covers the entire row */
+  width: 100%;
+  height: 100%;
+  border: 1px solid #CECECE;
+  pointer-events: none; /* Allow clicks to pass through the pseudo-element */
+}

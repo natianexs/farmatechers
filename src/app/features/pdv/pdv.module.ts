@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxMaskDirective} from "ngx-mask";
-import {PdvComponent} from "./pdv/pdv.component";
-import {BarcodeScannerComponent} from "./pdv/components/barcode-scanner/barcode-scanner.component";
-import {ListPdvComponent} from "./pdv/components/list-pdv/list-pdv.component";
 import {BarcodeScannerLivestreamModule} from "ngx-barcode-scanner";
+import {PdvComponent} from "./page/pdv.component";
+import {ListPdvComponent} from "./components/list-pdv/list-pdv.component";
 
 
 
 @NgModule({
-  declarations: [PdvComponent, BarcodeScannerComponent, ListPdvComponent],
+  declarations: [PdvComponent, ListPdvComponent],
   imports: [
     CommonModule,
     FormsModule,
