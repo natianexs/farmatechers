@@ -43,7 +43,7 @@ export class PdvComponent implements AfterViewInit {
       this.errorMessage = ''
       return;
     }
-    const product = this.mockProductSearch(this.searchQuery);
+    const product = this.getproduct(this.searchQuery);
     if (product) {
       this.addProductToSale(product);
       this.currentProduct = product;
@@ -64,8 +64,9 @@ export class PdvComponent implements AfterViewInit {
 
   onValueChanges(result: any) {
     this.barcodeValue = result.codeResult.code;
-    const product= this.mockProductSearch('1131667395');
+    const product= this.getproduct(this.barcodeValue);
     console.log(result);
+    console.log(this.searchQuery);
     if (product) {
       this.addProductToSale(product);
       this.errorMessage = '';
@@ -86,6 +87,14 @@ export class PdvComponent implements AfterViewInit {
 
   onStarted(started: any) {
     console.log('Barcode scanner started', started);
+  }
+
+  getproduct(query: string){
+    let product:any;
+    this.service.getProduct(query).subscribe((data: any) => {
+      product = data;
+    })
+    return product?.find((product:any) => product.code === query);
   }
 
   mockProductSearch(query: string) {
