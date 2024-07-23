@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {ListProductsService} from "../../list-products/services/list-products.service";
 import {BarcodeScannerLivestreamComponent} from "ngx-barcode-scanner";
 import {document} from "ngx-bootstrap/utils";
-
+import {Product} from "../../../core/models/products";
 
 
 @Component({
@@ -38,19 +38,12 @@ export class PdvComponent implements AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  searchProduct() {
+  async searchProduct() {
     if(this.searchQuery === ''){
       this.errorMessage = ''
       return;
     }
-    const product = this.getproduct(this.searchQuery);
-    if (product) {
-      this.addProductToSale(product);
-      this.currentProduct = product;
-      this.errorMessage = '';
-    } else {
-      this.errorMessage = 'Produto não encontrado';
-    }
+    this.getproduct(this.searchQuery);
   }
 
   openBarcodeScanner() {
@@ -63,38 +56,40 @@ export class PdvComponent implements AfterViewInit {
   }
 
   onValueChanges(result: any) {
-    this.barcodeValue = result.codeResult.code;
-    const product= this.getproduct(this.barcodeValue);
-    console.log(result);
-    console.log(this.searchQuery);
-    if (product) {
-      this.addProductToSale(product);
-      this.errorMessage = '';
-    } else {
-      this.errorMessage = 'Produto não encontrado';
-    }
+    this.barcodeValue =  result.codeResult.code;
+    console.log(result)
+    this.getproduct(this.barcodeValue);
+    // if (this.currentProduct) {
+    //   this.addProductToSale(this.currentProduct);
+    //   this.errorMessage = '';
+    // } else {
+    //   this.errorMessage = 'Produto não encontrado';
+    // }
     this.isBarcodeScannerVisible = false;
     this.barcodeScanner.stop();
   }
-
-
-  // onValueChanges(result: any) {
-  //   this.barcodeValue = result.codeResult.code;
-  //   this.addProductByBarcode(this.barcodeValue);
-  //   this.isBarcodeScannerVisible = false;
-  //   this.barcodeScanner.stop();
-  // }
 
   onStarted(started: any) {
     console.log('Barcode scanner started', started);
   }
 
-  getproduct(query: string){
-    let product:any;
-    this.service.getProduct(query).subscribe((data: any) => {
-      product = data;
-    })
-    return product?.find((product:any) => product.code === query);
+  getproduct(query: string) {
+    this.service.getProduct(query).subscribe((response: Product) => {
+      this.currentProduct = this.extractObj(response);
+      console.log(response)
+      this.addProductToSale(this.currentProduct);
+      if (this.currentProduct) {
+        this.errorMessage = '';
+      } else {
+        this.errorMessage = 'Produto não encontrado';
+      }
+    });
+  }
+
+  extractObj(response: any) {
+    const value = response;
+    const key = Object.keys(value)[0];
+    return value[key];
   }
 
   mockProductSearch(query: string) {
@@ -108,7 +103,7 @@ export class PdvComponent implements AfterViewInit {
   }
 
   addProductToSale(product: any) {
-    const existingProduct = this.productList.find(p => p.code === product.code);
+    const existingProduct = this.productList.find(p => p.barCode === product.barCode);
     if (existingProduct) {
       existingProduct.quantity += 1;
     } else {
@@ -117,8 +112,12 @@ export class PdvComponent implements AfterViewInit {
     this.calculateTotal();
   }
 
-  calculateTotal() {
-    this.totalValue = this.productList.reduce((total, product) => total + (product.price * product.quantity), 0);
+  calculateTotal():void {
+    this.totalValue = this.productList.reduce((total, product) => total + (parseFloat(product.price) * product.quantity), 0);
+    if(this.totalValue <= 1){
+      this.currentProduct = null;
+      this.searchQuery= ''
+      }
   }
 
   finalizeSale() {

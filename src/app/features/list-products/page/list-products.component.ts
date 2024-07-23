@@ -24,7 +24,6 @@ export class ListProductsComponent implements OnInit {
   private getProducts(filter = '') {
     this.service.gelAllProducts(filter).subscribe((products:Product) => {
       this.products = products;
-      console.log(this.products);
     });
   }
 

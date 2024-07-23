@@ -12,8 +12,8 @@ export interface Product {
 }
 
 export interface Products {
-  code:string;
-  name:string;
+  barCode:string;
+  description:string;
   price: number;
   quantity: number;
 }

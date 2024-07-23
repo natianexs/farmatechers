@@ -20,7 +20,7 @@ export class ListProductsService {
     return this.httpClient.delete<void>(`https://farmatech-27e91-default-rtdb.firebaseio.com/Products/${key}.json`);
   }
 
-  getProduct(barcode: string) {
+  getProduct(barcode: string):Observable<Product> {
     return this.httpClient.get<Product>(`https://farmatech-27e91-default-rtdb.firebaseio.com/Products/.json?orderBy="barCode"&equalTo=${barcode}`);
   }
 

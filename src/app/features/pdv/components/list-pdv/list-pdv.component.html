@@ -13,8 +13,8 @@
     </thead>
     <tbody *ngFor="let product of productList; let index=index">
       <tr>
-        <th scope="row">{{product.code}}</th>
-        <td>{{product.name}}</td>
+        <th scope="row">{{product.barCode}}</th>
+        <td>{{product.description}}</td>
         <td>
             <button class="btn btn-danger" (click)="removeProduct(product,index)"> - </button>
         </td>

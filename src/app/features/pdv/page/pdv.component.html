@@ -26,17 +26,17 @@
         </div>
 
         <span class="text-dark text-center" *ngIf="!productList.length" >Não há produtos adicionados à listagem</span>
-        <app-list-pdv (emitterCalculate)="calculateTotal()" [productList]="productList"></app-list-pdv>
+        <app-list-pdv (emitterCalculate)="calculateTotal()" [productList]="(productList)"></app-list-pdv>
       </div>
 
       <div id="product-image" class="col-4">
         <div class="card rounded">
 
           <barcode-scanner-livestream
-            type="code_128"
+            (started)="(onStarted)"
             (valueChanges)="onValueChanges($event)"
-            (started)="onStarted($event)"
             [hidden]="!isBarcodeScannerVisible"
+            type="code_128"
           ></barcode-scanner-livestream>
 
          <img src="assets/medicine.svg" class="rounded float-left" alt="..." [hidden]="isBarcodeScannerVisible">
@@ -47,7 +47,7 @@
               {{ barcodeValue }}
             </div>
 
-            <label class="text-dark col">{{currentProduct?.name}}</label>
+            <label class="text-dark col">{{currentProduct?.description}}</label>
             <div class="cash col">R$ {{currentProduct?.price}}</div>
           </div>
         </div>

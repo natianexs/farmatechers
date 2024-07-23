@@ -7,10 +7,9 @@ import {Products} from "../../../../core/models/products";
   templateUrl: './list-pdv.component.html',
   styleUrl: './list-pdv.component.scss'
 })
-export class ListPdvComponent {
+export class ListPdvComponent{
   @Input() productList: Products[] = [];
   @Output() emitterCalculate = new EventEmitter();
-  notFoundMessage: string = '';
 
   constructor() { }
 
@@ -24,7 +23,6 @@ export class ListPdvComponent {
   }
 
   increaseQuantity(product: any) {
-    console.log('aaa');
     product.quantity += 1;
     this.emitterCalculate.emit()
   }
