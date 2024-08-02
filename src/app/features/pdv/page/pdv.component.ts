@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {ListProductsService} from "../../list-products/services/list-products.service";
 import {BarcodeScannerLivestreamComponent} from "ngx-barcode-scanner";
-import {document} from "ngx-bootstrap/utils";
 import {Product} from "../../../core/models/products";
 
 
@@ -10,7 +9,7 @@ import {Product} from "../../../core/models/products";
   templateUrl: './pdv.component.html',
   styleUrl: './pdv.component.scss'
 })
-export class PdvComponent implements AfterViewInit {
+export class PdvComponent {
   @ViewChild(BarcodeScannerLivestreamComponent)
   barcodeScanner!: BarcodeScannerLivestreamComponent;
   searchQuery: string = '';
@@ -23,20 +22,6 @@ export class PdvComponent implements AfterViewInit {
 
 
   constructor(private service: ListProductsService) { }
-
-  onBarcodeDetected(code: string): void {
-    // Aqui você pode adicionar a lógica para comunicar com o componente de listagem
-    const productList = document.querySelector('app-product-list');
-    if (productList) {
-      const addProductFn = (productList as any).addProduct;
-      if (typeof addProductFn === 'function') {
-        addProductFn.call(productList, code);
-      }
-    }
-  }
-
-  ngAfterViewInit(): void {
-  }
 
   async searchProduct() {
     if(this.searchQuery === ''){
@@ -59,12 +44,6 @@ export class PdvComponent implements AfterViewInit {
     this.barcodeValue =  result.codeResult.code;
     console.log(result)
     this.getproduct(this.barcodeValue);
-    // if (this.currentProduct) {
-    //   this.addProductToSale(this.currentProduct);
-    //   this.errorMessage = '';
-    // } else {
-    //   this.errorMessage = 'Produto não encontrado';
-    // }
     this.isBarcodeScannerVisible = false;
     this.barcodeScanner.stop();
   }
@@ -75,10 +54,9 @@ export class PdvComponent implements AfterViewInit {
 
   getproduct(query: string) {
     this.service.getProduct(query).subscribe((response: Product) => {
-      this.currentProduct = this.extractObj(response);
-      console.log(response)
-      this.addProductToSale(this.currentProduct);
-      if (this.currentProduct) {
+      if (this.extractObj(response)) {
+        this.currentProduct = this.extractObj(response);
+        this.addProductToSale(this.currentProduct);
         this.errorMessage = '';
       } else {
         this.errorMessage = 'Produto não encontrado';
