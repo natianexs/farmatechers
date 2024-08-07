@@ -18,7 +18,6 @@ export class RegisterMedicationComponent implements OnInit {
     private service: RegisterMedicationService,
   ) {
     this.key = this.router.url.split('/')[2];
-    console.log(this.key);
   }
 
   ngOnInit(): void {
@@ -51,12 +50,12 @@ export class RegisterMedicationComponent implements OnInit {
   save() {
     if (this.key) {
       this.service.updateProduct(this.key, this.form.value).subscribe(() => {
-        alert('Product updated successfully');
+        alert('Produto atualizado com sucesso');
         this.router.navigate(['products']);
       });
     } else {
       this.service.createRegisterMedication(this.form.value).subscribe(() => {
-        alert('Product created successfully');
+        alert('Produto cadastrado com sucesso');
         this.form.reset();
       });
     }

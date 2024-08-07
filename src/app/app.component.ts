@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SidebarModule} from "./features/sidebar/sidebar.module";
 import {RouterOutlet} from "@angular/router";
 import {SharedModule} from "./shared/shared.module";
-import {BrowserModule} from "@angular/platform-browser";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -15,4 +12,5 @@ import {CommonModule} from "@angular/common";
 })
 export class AppComponent {
   title = 'farmatechers';
+
 }

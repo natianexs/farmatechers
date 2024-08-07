@@ -70,16 +70,6 @@ export class PdvComponent {
     return value[key];
   }
 
-  mockProductSearch(query: string) {
-    // Esta função é um mock. Implemente a lógica real de busca de produtos.
-    const products = [
-      { code: '1131667395', name: 'Produto 1', price: 10.00 },
-      { code: '987654321', name: 'Produto 2', price: 15.00 },
-      { code: '111213141', name: 'Produto 3', price: 20.00 }
-    ];
-    return products.find(product => product.code === query);
-  }
-
   addProductToSale(product: any) {
     const existingProduct = this.productList.find(p => p.barCode === product.barCode);
     if (existingProduct) {
@@ -99,9 +89,10 @@ export class PdvComponent {
   }
 
   finalizeSale() {
-    // Implementar a lógica para finalizar a venda
-    console.log('Venda finalizada', this.productList);
     this.productList = [];
+    this.currentProduct = [];
     this.totalValue = 0;
+    this.searchQuery = ''
+    alert("Venda realizada com sucesso")
   }
 }

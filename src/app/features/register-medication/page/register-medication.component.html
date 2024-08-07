@@ -1,9 +1,9 @@
 <div class="p-3 border-bottom">
   <div class="d-flex justify-content-star align-items-center">
-    <a href="" class="border-0 text-title-default">
+    <a href="{{key? '/products' : '/home'}}" class="border-0 text-title-default">
       <i class="bi bi-arrow-left-circle mr-2"></i>
     </a>
-    <h1 class="text-center text-title-default">Cadastro de Produtos</h1>
+    <h1 class="text-center text-title-default">{{ key ? 'Editar Produto' : 'Cadastro de Produto' }}</h1>
   </div>
 
 </div>

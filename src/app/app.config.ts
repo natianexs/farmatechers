@@ -12,6 +12,8 @@ import {SharedModule} from "./shared/shared.module";
 import {CommonModule} from "@angular/common";
 import {HomeModule} from "./features/home/home.module";
 import {PdvModule} from "./features/pdv/pdv.module";
+import {AuthGuard} from "./core/interceptors/auth.guard";
+import {AuthService} from "./core/services/auth.service";
 
 
 
@@ -29,5 +31,6 @@ export const appConfig: ApplicationConfig = {
     CommonModule, RouterOutlet,
     provideEnvironmentNgxMask(),
     provideHttpClient(withFetch()),
+    AuthGuard, AuthService
   ],
 };

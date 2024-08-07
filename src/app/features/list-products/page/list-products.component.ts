@@ -30,7 +30,7 @@ export class ListProductsComponent implements OnInit {
   deleteItem(key: string) {
     //colocar modal de confirmação
     this.service.deleteProduct(key).subscribe(() => {
-      alert('Product deleted successfully');
+      alert('Produto deletado com sucesso');
       this.getProducts();
     });
   }

@@ -1,17 +1,10 @@
-
 .bi::before{
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .form-control{
   background-color:#F8F8F8;
   border: 1px solid #D4D4D4;
-}
-
-.header {
-  background-color: var(--default-color-background);
-  position: absolute;
-  width: 100%;
 }
 
 .cash {
@@ -26,4 +19,8 @@
   &-value{
     font-size: 60px;
   }
+}
+
+h1, a , label {
+  color: var(--default-color-title);
 }
