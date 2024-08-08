@@ -1,15 +1,16 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {ListProductsService} from "../../list-products/services/list-products.service";
-import {BarcodeScannerLivestreamComponent} from "ngx-barcode-scanner";
-import {Product} from "../../../core/models/products";
-
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { ListProductsService } from "../../list-products/services/list-products.service";
+import { BarcodeScannerLivestreamComponent } from "ngx-barcode-scanner";
+import { Product } from "../../../core/models/products";
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pdv',
   templateUrl: './pdv.component.html',
   styleUrl: './pdv.component.scss'
 })
-export class PdvComponent {
+export class PdvComponent implements AfterViewInit {
   @ViewChild(BarcodeScannerLivestreamComponent)
   barcodeScanner!: BarcodeScannerLivestreamComponent;
   searchQuery: string = '';
@@ -20,8 +21,19 @@ export class PdvComponent {
   totalValue: number = 0;
   currentProduct!: any;
 
+  private barcodeSubject: Subject<string> = new Subject<string>();
 
   constructor(private service: ListProductsService) { }
+
+  ngAfterViewInit() {
+    this.barcodeSubject.pipe(
+      debounceTime(300) // Espera 300ms antes de processar o valor
+    ).subscribe(code => {
+      this.getproduct(code);
+      this.isBarcodeScannerVisible = false;
+      this.barcodeScanner.stop();
+    });
+  }
 
   async searchProduct() {
     if(this.searchQuery === ''){
@@ -42,10 +54,8 @@ export class PdvComponent {
 
   onValueChanges(result: any) {
     this.barcodeValue =  result.codeResult.code;
-    console.log(result)
-    this.getproduct(this.barcodeValue);
-    this.isBarcodeScannerVisible = false;
-    this.barcodeScanner.stop();
+    console.log(this.barcodeValue);
+    this.barcodeSubject.next(this.barcodeValue); // Emite o valor do código de barras para o Subject
   }
 
   onStarted(started: any) {
@@ -56,6 +66,7 @@ export class PdvComponent {
     this.service.getProduct(query).subscribe((response: Product) => {
       if (this.extractObj(response)) {
         this.currentProduct = this.extractObj(response);
+        console.log(this.currentProduct);
         this.addProductToSale(this.currentProduct);
         this.errorMessage = '';
       } else {
@@ -80,12 +91,12 @@ export class PdvComponent {
     this.calculateTotal();
   }
 
-  calculateTotal():void {
+  calculateTotal(): void {
     this.totalValue = this.productList.reduce((total, product) => total + (parseFloat(product.price) * product.quantity), 0);
     if(this.totalValue <= 1){
       this.currentProduct = null;
-      this.searchQuery= ''
-      }
+      this.searchQuery = ''
+    }
   }
 
   finalizeSale() {

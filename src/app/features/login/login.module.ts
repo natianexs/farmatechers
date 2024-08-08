@@ -5,6 +5,7 @@ import {NgxMaskDirective} from "ngx-mask";
 import {RouterModule} from "@angular/router";
 import {AuthService} from "../../core/services/auth.service";
 import {AuthGuard} from "../../core/interceptors/auth.guard";
+import {LoginComponent} from "./page/login/login.component";
 
 
 
@@ -16,6 +17,7 @@ import {AuthGuard} from "../../core/interceptors/auth.guard";
     NgxMaskDirective,
     ReactiveFormsModule,
     RouterModule,
+    LoginComponent,
   ],
   providers: [AuthGuard, AuthService]
 })
