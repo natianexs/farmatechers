@@ -12,7 +12,7 @@ export class ListProductsService {
   constructor(private httpClient:HttpClient) { }
 
   gelAllProducts(filter:string): Observable<Product> {
-    const query = filter ? `?orderBy="barCode"&equalTo="${filter}"` : '';
+    const query = filter ? `?orderBy="barCode"&equalTo=${filter}` : '';
     return this.httpClient.get<Product>(`https://farmatech-27e91-default-rtdb.firebaseio.com/Products/.json${query}`);
   }
 

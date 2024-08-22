@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterMedicationService } from '../services/register-medication.service';
 
@@ -27,11 +27,11 @@ export class RegisterMedicationComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      barCode: [''],
-      description: [''],
-      price: [''],
-      expirationDate: [''],
-      quantity: ['']
+      barCode: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      expirationDate: ['', [Validators.required]],
+      quantity: ['', [Validators.required]]
     });
   }
 
@@ -48,6 +48,7 @@ export class RegisterMedicationComponent implements OnInit {
   }
 
   save() {
+    if(this.form.invalid) return;
     if (this.key) {
       this.service.updateProduct(this.key, this.form.value).subscribe(() => {
         alert('Produto atualizado com sucesso');

@@ -17,6 +17,10 @@ import {AuthService} from "../../../../core/services/auth.service";
 export class LoginComponent implements OnInit {
   formLogin!:FormGroup;
   inputType = 'password'
+  mockUser = {
+    username:  'farmatechers',
+    password: 'admin1'
+  }
 
   constructor(private formBuilder: FormBuilder, private router: Router, private service: AuthService) { }
 
@@ -36,8 +40,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(){
-  this.service.login(this.formLogin.value)
+  login() {
+    const formValue = this.formLogin.value;
+    if (this.mockUser.username === formValue.username.trim() && this.mockUser.password === formValue.password.trim()) {
+      this.service.login(formValue);
+    } else {
+      alert('Usuário não autorizado.');
+    }
   }
 
 
