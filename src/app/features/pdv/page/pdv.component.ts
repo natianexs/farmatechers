@@ -20,6 +20,7 @@ export class PdvComponent implements AfterViewInit {
   errorMessage: string = '';
   totalValue: number = 0;
   currentProduct!: any;
+  beepSound = new Audio('assets/audio/beep.mp3');
 
   private barcodeSubject: Subject<string> = new Subject<string>();
 
@@ -69,6 +70,7 @@ export class PdvComponent implements AfterViewInit {
         console.log(this.currentProduct);
         this.addProductToSale(this.currentProduct);
         this.errorMessage = '';
+        this.beepSound.play();
       } else {
         this.errorMessage = 'Produto não encontrado';
       }
