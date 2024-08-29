@@ -36,7 +36,12 @@ export class RegisterMedicationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['']);
+    if (this.key) {
+      this.router.navigate(['/products']);
+    }else{
+      this.router.navigate(['/home']);
+    }
+
   }
 
   getProduct() {
